@@ -69,6 +69,7 @@ const HomeScreen = () => {
   getCoffeeList(categoryIndex.category, CoffeeList),
 );
 const tabBarHeight = useBottomTabBarHeight();
+console.log('sortedCoffee=',sortedCoffee.length)
   
   return (
     <View style={styles.ScreenContainer}>
@@ -109,11 +110,17 @@ const tabBarHeight = useBottomTabBarHeight();
           style={styles.CategoryScrollViewContainer}>
             <TouchableOpacity 
             style={styles.CategoryScrollViewItem}
-            onPress={() => {}}>
+            onPress={() => {
+              srtCategoryIndex({index: index, category: categories[index]});
+                  setSortedCoffee([
+                    ...getCoffeeList(categories[index], CoffeeList),
+                  ]);
+            }}>
               <Text 
               style={[
                 styles.CategoryText,
-                categoryIndex.index == index ? {} : {},
+                categoryIndex.index == index ? {color: COLORS.primaryOrangeHex}
+                 : {},
                 ]}>
                   {data}
                   </Text>
