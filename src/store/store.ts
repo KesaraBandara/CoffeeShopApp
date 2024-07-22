@@ -136,7 +136,21 @@ export const useStore = create(
                   state.FavoritesList.splice(spliceIndex, 1);
                 }),
               ),
-
+              incrementCartItemQuantity: (id: string, size: string) =>
+                set(
+                  produce(state => {
+                    for (let i = 0; i < state.CartList.length; i++) {
+                      if (state.CartList[i].id == id) {
+                        for (let j = 0; j < state.CartList[i].prices.length; j++) {
+                          if (state.CartList[i].prices[j].size == size) {
+                            state.CartList[i].prices[j].quantity++;
+                            break;
+                          }
+                        }
+                      }
+                    }
+                  }),
+                ),
       }),
       {
       name: 'coffee-app',
